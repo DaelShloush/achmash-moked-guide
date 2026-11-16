@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="מדריך אחמ״ש — מוקד בזק">
+<title>מדריך אחמ״ש — מוקד בזק</title>
+<style>
+  :root{
+    --bezeq-blue:#0033a0;
+    --bezeq-blue-dark:#002372;
+    --bezeq-cyan:#00a0e3;
+    --bezeq-light:#e8f1fb;
+    --bezeq-sky:#d4e6f7;
+    --ink:#1a2436;
+    --muted:#5a6b82;
+    --card:#ffffff;
+    --bg:#f4f8fd;
+    --line:#dce7f3;
+    --shadow:0 4px 18px rgba(0,51,160,.08);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI","Heebo","Assistant",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--bezeq-blue) 0%,var(--bezeq-blue-dark) 60%,#001a54 100%);
+    color:#fff;padding:48px 20px 40px;text-align:center;position:relative;overflow:hidden;
+  }
+  header::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 80% -10%,rgba(0,160,227,.35),transparent 45%);
+  }
+  header h1{font-size:2.1rem;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1}
+  header p{font-size:1.05rem;opacity:.92;margin-top:8px;font-weight:500;position:relative;z-index:1}
+  .badge{
+    display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+    padding:5px 16px;border-radius:999px;font-size:.82rem;font-weight:600;margin-top:16px;
+    position:relative;z-index:1;backdrop-filter:blur(4px);
+  }
+
+  /* NAV */
+  nav{
+    background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;
+    box-shadow:0 2px 10px rgba(0,51,160,.05);
+  }
+  .nav-inner{
+    max-width:1100px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 14px;
+    scrollbar-width:thin;
+  }
+  nav a{
+    white-space:nowrap;text-decoration:none;color:var(--bezeq-blue);font-weight:600;font-size:.9rem;
+    padding:8px 14px;border-radius:999px;transition:.2s;border:1px solid transparent;
+  }
+  nav a:hover{background:var(--bezeq-light);border-color:var(--line)}
+
+  main{max-width:1100px;margin:0 auto;padding:34px 18px 60px}
+
+  section{margin-bottom:40px;scroll-margin-top:70px}
+  .sec-title{
+    display:flex;align-items:center;gap:12px;font-size:1.5rem;font-weight:800;
+    color:var(--bezeq-blue-dark);margin-bottom:20px;padding-bottom:12px;border-bottom:3px solid var(--bezeq-light);
+  }
+  .sec-title .ico{
+    background:linear-gradient(135deg,var(--bezeq-blue),var(--bezeq-cyan));color:#fff;
+    width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;flex-shrink:0;
+    box-shadow:var(--shadow);
+  }
+
+  /* ROLES GRID */
+  .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .role-card{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .role-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,51,160,.14)}
+  .role-head{
+    background:linear-gradient(135deg,var(--bezeq-blue),var(--bezeq-blue-dark));
+    color:#fff;padding:16px 18px;font-weight:800;font-size:1.12rem;display:flex;align-items:center;gap:10px;
+  }
+  .role-head .dot{width:9px;height:9px;border-radius:50%;background:var(--bezeq-cyan);box-shadow:0 0 0 4px rgba(0,160,227,.25)}
+  .role-body{padding:8px 0}
+  .role-body ul{list-style:none}
+  .role-body li{
+    padding:10px 18px 10px 18px;border-bottom:1px solid #eef4fa;font-size:.94rem;color:var(--ink);
+    display:flex;gap:10px;align-items:flex-start;transition:background .15s;
+  }
+  .role-body li:last-child{border-bottom:none}
+  .role-body li:hover{background:var(--bezeq-light)}
+  .role-body li::before{
+    content:"";margin-top:8px;width:7px;height:7px;border-radius:50%;
+    background:var(--bezeq-cyan);flex-shrink:0;
+  }
+
+  /* STATUS CHIPS */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;min-width:150px;font-weight:600;
+  }
+  .chip .num{
+    background:var(--bezeq-light);color:var(--bezeq-blue-dark);font-weight:800;
+    width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:.9rem;flex-shrink:0;
+  }
+
+  /* SYSTEM LIST CARDS */
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .panel{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    border:1px solid var(--line);padding:0;overflow:hidden;
+  }
+  .panel-head{
+    background:var(--bezeq-light);color:var(--bezeq-blue-dark);font-weight:800;font-size:1.05rem;
+    padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;
+  }
+  .panel-head .ic{font-size:1.15rem}
+  .panel ul{list-style:none;padding:6px 0}
+  .panel li{
+    padding:9px 18px;border-bottom:1px solid #eef4fa;font-size:.92rem;display:flex;gap:9px;align-items:flex-start;
+  }
+  .panel li:last-child{border-bottom:none}
+  .panel li::before{content:"▸";color:var(--bezeq-cyan);font-weight:800;flex-shrink:0}
+  .tag{
+    display:inline-block;background:var(--bezeq-cyan);color:#fff;font-size:.72rem;font-weight:800;
+    padding:2px 9px;border-radius:999px;margin-inline-start:6px;vertical-align:middle;
+  }
+
+  /* ARROW / DUAL */
+  .dual{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);
+    padding:20px;margin-bottom:16px;
+  }
+  .dual-title{font-weight:800;color:var(--bezeq-blue-dark);font-size:1.08rem;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .dual-sub{color:var(--muted);font-size:.88rem;margin-bottom:14px}
+  .arrows{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .arrow-box{
+    background:var(--bezeq-light);border:1px solid var(--bezeq-sky);border-radius:12px;padding:14px 16px;
+    position:relative;
+  }
+  .arrow-box .pill{
+    position:absolute;top:-11px;inset-inline-start:14px;background:var(--bezeq-blue);color:#fff;
+    font-size:.72rem;font-weight:800;padding:3px 11px;border-radius:999px;
+  }
+  .arrow-box strong{display:block;color:var(--bezeq-blue-dark);font-size:.98rem;margin:6px 0 2px}
+  .arrow-box span{font-size:.86rem;color:var(--muted)}
+
+  /* TABLE (WOW) */
+  .wow-wrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
+  .wow-banner{
+    background:linear-gradient(135deg,var(--bezeq-cyan),var(--bezeq-blue));color:#fff;
+    padding:16px 20px;font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:12px;
+  }
+  .wow-banner .time{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;font-size:.8rem;margin-inline-start:auto}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:13px 18px;text-align:right;font-size:.94rem}
+  thead th{background:var(--bezeq-light);color:var(--bezeq-blue-dark);font-weight:800;font-size:.85rem}
+  tbody tr{border-top:1px solid #eef4fa}
+  tbody tr:hover{background:var(--bezeq-light)}
+  td:first-child{font-weight:700}
+  .sol{color:var(--bezeq-blue);font-weight:700}
+
+  .note{
+    background:var(--bezeq-light);border-inline-start:4px solid var(--bezeq-cyan);
+    border-radius:10px;padding:12px 16px;font-size:.9rem;color:var(--muted);margin-top:14px;
+  }
+
+  footer{
+    text-align:center;padding:28px 20px;color:var(--muted);font-size:.84rem;
+    border-top:1px solid var(--line);background:#fff;
+  }
+  footer .heart{color:var(--bezeq-cyan)}
+
+  @media(max-width:560px){
+    header h1{font-size:1.6rem}
+    .sec-title{font-size:1.25rem}
+    .arrows{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>מדריך אחמ״ש</h1>
+  <p>מוקד בזק · ריכוז משימות, סטטוסים ומערכות</p>
+  <span class="badge">קיט חניכה</span>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#roles">התפקידים</a>
+    <a href="#status">סטטוס חסימות</a>
+    <a href="#systems">מערכות בוקר</a>
+    <a href="#ccpulse">CC Pulse</a>
+    <a href="#shifter">שיפטר</a>
+    <a href="#digital">ערוצים דיגיטליים</a>
+    <a href="#wow">WOW Factor</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ROLES -->
+  <section id="roles">
+    <div class="sec-title"><span class="ico">👥</span> ארבעת התפקידים</div>
+    <div class="roles">
+
+      <div class="role-card">
+        <div class="role-head"><span class="dot"></span> אחמ״ש זמינות</div>
+        <div class="role-body"><ul>
+          <li>בדיקת לוגין כל שעה עגולה</li>
+          <li>בדיקת סקילים</li>
+          <li>בדיקת חסימות מיותרות</li>
+          <li>שליחת ברוטו צוותי כל שעה וחצי / שעתיים</li>
+          <li>בדיקה שזמני ההפסקות לא חורגים</li>
+          <li>שליחת אישיות גבוהות</li>
+          <li>בדיקה של אחוז פעילות טלפונית</li>
+          <li>בדיקת מיילים</li>
+          <li>לדווח בקובץ נטרולים</li>
+          <li>לעדכן בקובץ סיכום משמרת</li>
+          <li>שליחת סטטוס 16 (ברוטו + תקנה + מכירות)</li>
+        </ul></div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-head"><span class="dot"></span> אחמ״ש תפעול</div>
+        <div class="role-body"><ul>
+          <li>סימון נוכחות בשיפטר</li>
+          <li>שחרור שלוחות</li>
+          <li>בדיקת לוגין של יום קודם (פורטל BI)</li>
+          <li>סטטוס בוקר + צהריים</li>
+          <li>הפסקות בכירים</li>
+          <li>דוח יומי אור-לי</li>
+          <li>הערכות למחר — חמישי</li>
+          <li>שליחת מוניות</li>
+          <li>בדיקה כל הזמן על תור דיגיטל / בכירים</li>
+          <li>שליחת גורמות של אתמול לולרי</li>
+          <li>החלפות</li>
+          <li>בדיקת מיילים</li>
+        </ul></div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-head"><span class="dot"></span> אחמ״ש מסתובב</div>
+        <div class="role-body"><ul>
+          <li>ב-08:00 בדיקה שכולם העלו מערכת</li>
+          <li>תפעול תקלות מהבית</li>
+          <li>לוודא שהספארק פתוח לנציגים</li>
+          <li>לוודא שכולם ביצעו כניסה בשיפטר</li>
+          <li>שיחות ארוכות</li>
+          <li>מכירות (התחברות לנציגים)</li>
+          <li>החלפת הפסקות בבמה</li>
+          <li>התנהלות שוטפת מול אחמ״ש זמינות</li>
+          <li>אחראי שירים :)</li>
+        </ul></div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-head"><span class="dot"></span> אחמ״ש ערב</div>
+        <div class="role-body"><ul>
+          <li>בדיקת לוגין כל שעה</li>
+          <li>בדיקת סקילים</li>
+          <li>דיווח חניכה</li>
+          <li>דוח התנהלות</li>
+          <li>סגירת משמרות ערב</li>
+          <li>תפעול עבודה מהבית</li>
+          <li>שליחת ברוטו כל שעה וחצי / שעתיים</li>
+          <li>דיווח מכירות</li>
+          <li>שליחת קובץ נטרולים לבמה מרכזית</li>
+          <li>סימון מפוצלות בשיפטר</li>
+          <li>שליחת סיום יום לסגל (ברוטו 16+20, מכירות, סיכום משמרת, משמרות ערב)</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section id="status">
+    <div class="sec-title"><span class="ico">🚦</span> סטטוס חסימות</div>
+    <div class="chips">
+      <div class="chip"><span class="num">1</span> זמין / לא זמין</div>
+      <div class="chip"><span class="num">2</span> אישי</div>
+      <div class="chip"><span class="num">3</span> הפסקה</div>
+      <div class="chip"><span class="num">4</span> עורף</div>
+      <div class="chip"><span class="num">5</span> דיגיטל</div>
+      <div class="chip"><span class="num">6</span> הדרכות</div>
+      <div class="chip"><span class="num">7</span> מאגרים</div>
+      <div class="chip"><span class="num">8</span> משוב</div>
+      <div class="chip"><span class="num">NA</span> ללא סיבה</div>
+    </div>
+  </section>
+
+  <!-- SYSTEMS + CCPULSE -->
+  <section id="systems">
+    <div class="sec-title"><span class="ico">🖥️</span> מערכות להעלאה בבוקר</div>
+    <div class="cols">
+
+      <div class="panel">
+        <div class="panel-head"><span class="ic">⚙️</span> מערכות</div>
+        <ul>
+          <li>שיפטר <span class="tag">×2</span></li>
+          <li>ערוצים דיגיטליים <span class="tag">×2</span></li>
+          <li>ספארק</li>
+          <li>מערכת MENI</li>
+          <li>מערכת CM</li>
+          <li>מייל</li>
+          <li>PRV Home Agent</li>
+          <li>פורטל BI</li>
+          <li>גט טקסי</li>
+          <li>וואטסאפ ווב</li>
+          <li>דוחות במה (סיכום משמרת + נטרולים)</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="ccpulse">
+        <div class="panel-head"><span class="ic">📊</span> מערכות CC Pulse <span class="tag">4 להעלאה</span></div>
+        <ul>
+          <li>PRV_CCPluse8 — איחוד שעתי 1</li>
+          <li>Binf-DTL-CCPluse8 — נתונים מסחרי ירושלים</li>
+          <li>199-Agents-CCPluse8 — חריגים ירושלים חדש</li>
+          <li>199-Agents-CCPluse8 — ירושלים זמן שיחה נציג 1</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SHIFTER -->
+  <section id="shifter">
+    <div class="sec-title"><span class="ico">🗂️</span> שיפטר — שני חצים</div>
+    <div class="dual">
+      <div class="dual-title">📌 פתיחה פעמיים</div>
+      <div class="dual-sub">חץ אחד מופנה לניהול נוכחות, השני לניהול משמרות</div>
+      <div class="arrows">
+        <div class="arrow-box">
+          <span class="pill">חץ 1</span>
+          <strong>ניהול נוכחות</strong>
+          <span>סימון במשבצות הגעה + תדריך</span>
+        </div>
+        <div class="arrow-box">
+          <span class="pill">חץ 2</span>
+          <strong>ניהול משמרות</strong>
+          <span>שחרור שלוחות</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL -->
+  <section id="digital">
+    <div class="sec-title"><span class="ico">💬</span> ערוצים דיגיטליים (גלאסיקס)</div>
+    <div class="dual">
+      <div class="dual-title">📌 שני חצים</div>
+      <div class="dual-sub">חץ אחד לניהול נוכחות, השני לניהול משמרות</div>
+      <div class="arrows">
+        <div class="arrow-box">
+          <span class="pill">חץ 1</span>
+          <strong>תור דיגיטל</strong>
+          <span>חוצץ שיחות של כולם</span>
+        </div>
+        <div class="arrow-box">
+          <span class="pill">חץ 2</span>
+          <strong>תור מומחי שירות</strong>
+          <span>חוצץ שיחות בתור</span>
+        </div>
+      </div>
+      <div class="note">
+        <strong>מחלקות בגלאסיקס:</strong><br>
+        • תור מומחי שירות — מומחי שירות טכני + מסחרי<br>
+        • תור דיגיטל — אגף שירות ותמיכה · טכני
+      </div>
+    </div>
+  </section>
+
+  <!-- WOW -->
+  <section id="wow">
+    <div class="sec-title"><span class="ico">⭐</span> WOW Factor</div>
+    <div class="wow-wrap">
+      <div class="wow-banner">💡 משימות יצירתיות <span class="time">⏱️ משימת 3 דקות</span></div>
+      <table>
+        <thead><tr><th>משימה</th><th>פתרון</th></tr></thead>
+        <tbody>
+          <tr><td>גזירת כוכב</td><td class="sol">מספריים</td></tr>
+          <tr><td>מגדל</td><td class="sol">כוסות</td></tr>
+          <tr><td>מילוי קערת מים עם פקק</td><td class="sol">בקבוקים</td></tr>
+          <tr><td>תרגיל מתמטי מסובך</td><td class="sol">מחשבון</td></tr>
+          <tr><td>רשימה של ראשי ממשלה לפי הסדר</td><td class="sol">GPT</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  מדריך אחמ״ש · מוקד בזק <span class="heart">◆</span> נבנה לצורכי חניכה פנימית
+</footer>
+
+</body>
+</html>
