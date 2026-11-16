@@ -109,16 +109,24 @@
   .role-head .rdot{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.16);
     display:grid;place-items:center;flex-shrink:0;font-size:1.2rem;border:1px solid rgba(255,255,255,.25)}
   .role-head h3{font-size:1.18rem;font-weight:800}
-  .role-head .cnt{margin-inline-start:auto;font-size:.72rem;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:999px;font-weight:700}
+  .role-head .cnt{margin-inline-start:auto;font-size:.74rem;background:rgba(255,255,255,.22);padding:4px 11px;border-radius:999px;font-weight:800;min-width:46px;text-align:center;transition:background .3s}
+  .role-head.allDone .cnt{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.3)}
   .role-body{padding:6px 0 10px}
   .role-body ul{list-style:none}
-  .role-body li{padding:11px 22px;font-size:.93rem;display:flex;gap:11px;align-items:flex-start;
+  .role-body li{padding:11px 22px;font-size:.93rem;display:flex;gap:11px;align-items:flex-start;cursor:pointer;user-select:none;
     border-bottom:1px solid rgba(0,60,160,.07);transition:background .2s,padding .2s}
   .role-body li:last-child{border-bottom:none}
   .role-body li:hover{background:linear-gradient(90deg,rgba(0,180,240,.1),transparent);padding-inline-start:28px}
-  .role-body li .tick{margin-top:3px;width:18px;height:18px;flex-shrink:0;border-radius:6px;
-    background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center}
-  .role-body li .tick svg{width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none}
+  /* empty checkbox by default */
+  .role-body li .tick{margin-top:2px;width:20px;height:20px;flex-shrink:0;border-radius:6px;
+    background:transparent;border:2px solid #b9cbe6;display:grid;place-items:center;transition:background .2s,border-color .2s,transform .15s}
+  .role-body li:hover .tick{border-color:var(--cyan)}
+  .role-body li .tick svg{width:12px;height:12px;stroke:#fff;stroke-width:3.2;fill:none;opacity:0;transform:scale(.4);transition:opacity .18s,transform .18s}
+  /* checked state */
+  .role-body li.done .tick{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;transform:scale(1.05)}
+  .role-body li.done .tick svg{opacity:1;transform:scale(1)}
+  .role-body li.done{color:#8a98ac}
+  .role-body li.done .txt{text-decoration:line-through;text-decoration-color:rgba(0,120,220,.5)}
 
   /* ===== STATUS CHIPS ===== */
   .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
@@ -441,6 +449,42 @@
   const btn=document.getElementById('toTop');
   addEventListener('scroll',()=>{btn.classList.toggle('show',scrollY>500)});
   btn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+  // ===== interactive checkboxes for role tasks =====
+  const STORE='achmash_checks_v1';
+  let saved={};
+  try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){saved={}}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify(saved))}catch(e){}}
+
+  document.querySelectorAll('.role-card').forEach((card,ci)=>{
+    const head=card.querySelector('.role-head');
+    const cnt=card.querySelector('.cnt');
+    const items=card.querySelectorAll('.role-body li');
+    // wrap bare text nodes in .txt span (so strike-through targets text only)
+    items.forEach((li,li_i)=>{
+      const key='c'+ci+'_'+li_i;
+      li.dataset.key=key;
+      // move trailing text nodes into a span
+      const span=document.createElement('span');
+      span.className='txt';
+      const kids=Array.from(li.childNodes);
+      kids.forEach(n=>{ if(n.nodeType===3 || (n.nodeType===1 && !n.classList.contains('tick'))) span.appendChild(n); });
+      li.appendChild(span);
+      if(saved[key]) li.classList.add('done');
+      li.addEventListener('click',()=>{
+        li.classList.toggle('done');
+        saved[key]=li.classList.contains('done');
+        if(!saved[key]) delete saved[key];
+        save(); updateCount();
+      });
+    });
+    function updateCount(){
+      const done=card.querySelectorAll('.role-body li.done').length;
+      cnt.textContent=done+'/'+items.length;
+      head.classList.toggle('allDone',done===items.length && items.length>0);
+    }
+    updateCount();
+  });
 </script>
 
 </body>
