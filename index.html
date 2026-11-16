@@ -10,200 +10,162 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --blue:#0047c3;
-    --blue-d:#002a8a;
-    --blue-dd:#001b5e;
-    --cyan:#00b4f0;
-    --cyan-l:#52d4ff;
-    --violet:#5b6ef5;
-    --ink:#0a1225;
-    --paper:#f0f5fc;
-    --glass:rgba(255,255,255,.72);
-    --glass-brd:rgba(255,255,255,.55);
+    --blue:#0047c3;--blue-d:#002a8a;--blue-dd:#001b5e;
+    --cyan:#00b4f0;--cyan-l:#52d4ff;--violet:#5b6ef5;
+    --ink:#0a1225;--paper:#f0f5fc;
+    --glass:rgba(255,255,255,.72);--glass-brd:rgba(255,255,255,.55);
     --radius:22px;
     --shadow-lg:0 20px 55px -18px rgba(0,40,130,.45);
     --shadow-sm:0 8px 26px -12px rgba(0,40,130,.35);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{
-    font-family:"Heebo",system-ui,sans-serif;color:var(--ink);line-height:1.65;
-    background:var(--paper);overflow-x:hidden;-webkit-font-smoothing:antialiased;
-  }
+  body{font-family:"Heebo",system-ui,sans-serif;color:var(--ink);line-height:1.65;background:var(--paper);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-  /* ===== ANIMATED AURORA BACKGROUND ===== */
   .aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:
     radial-gradient(1200px 800px at 85% -10%,#dbe9ff 0,transparent 55%),
     radial-gradient(1000px 700px at 5% 10%,#e4f4ff 0,transparent 50%),
-    linear-gradient(180deg,#eef5fe 0%,#f3f8fd 100%);}
+    linear-gradient(180deg,#eef5fe 0%,#f3f8fd 100%)}
   .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:float 22s ease-in-out infinite}
   .blob.b1{width:520px;height:520px;background:radial-gradient(circle,#7aa8ff,#0047c3);top:-160px;right:-120px}
   .blob.b2{width:460px;height:460px;background:radial-gradient(circle,#52d4ff,#00b4f0);bottom:-160px;left:-120px;animation-delay:-7s}
   .blob.b3{width:380px;height:380px;background:radial-gradient(circle,#9db4ff,#5b6ef5);top:40%;left:55%;animation-delay:-14s;opacity:.4}
   @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-50px) scale(1.08)}66%{transform:translate(-30px,40px) scale(.95)}}
 
-  /* ===== HERO ===== */
-  header{position:relative;padding:92px 20px 110px;text-align:center;color:#fff;overflow:hidden;
-    background:linear-gradient(135deg,var(--blue-dd) 0%,var(--blue-d) 45%,var(--blue) 100%);}
+  header{position:relative;padding:72px 20px 92px;text-align:center;color:#fff;overflow:hidden;
+    background:linear-gradient(135deg,var(--blue-dd) 0%,var(--blue-d) 45%,var(--blue) 100%)}
   header::before{content:"";position:absolute;inset:0;background:
     radial-gradient(900px 500px at 78% -5%,rgba(0,180,240,.4),transparent 50%),
-    radial-gradient(700px 500px at 10% 110%,rgba(91,110,245,.35),transparent 55%);}
+    radial-gradient(700px 500px at 10% 110%,rgba(91,110,245,.35),transparent 55%)}
   .hero-grid{position:absolute;inset:0;opacity:.14;
     background-image:linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);
-    background-size:46px 46px;mask-image:radial-gradient(circle at 50% 40%,#000 0,transparent 75%);}
+    background-size:46px 46px;mask-image:radial-gradient(circle at 50% 40%,#000 0,transparent 75%)}
   .hero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
-  .kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);
-    padding:7px 18px;border-radius:999px;font-size:.84rem;font-weight:600;letter-spacing:.3px;margin-bottom:22px;
-    animation:fadeDown .8s both}
-  .kicker .pulse{width:8px;height:8px;border-radius:50%;background:var(--cyan-l);box-shadow:0 0 0 0 rgba(82,212,255,.8);animation:ring 2s infinite}
+  .kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);padding:7px 18px;border-radius:999px;font-size:.84rem;font-weight:600;margin-bottom:20px;animation:fadeDown .8s both}
+  .kicker .pulse{width:8px;height:8px;border-radius:50%;background:var(--cyan-l);animation:ring 2s infinite}
   @keyframes ring{0%{box-shadow:0 0 0 0 rgba(82,212,255,.7)}70%{box-shadow:0 0 0 12px rgba(82,212,255,0)}100%{box-shadow:0 0 0 0 rgba(82,212,255,0)}}
-  header h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:900;letter-spacing:-1.5px;line-height:1.05;
-    background:linear-gradient(180deg,#fff 40%,#bcd6ff);-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:fadeDown .9s .1s both}
-  header p{font-size:clamp(1rem,2.5vw,1.25rem);opacity:.9;margin-top:16px;font-weight:400;animation:fadeDown 1s .2s both}
-  .hero-stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px;animation:fadeUp 1s .35s both}
-  .hstat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);
-    border-radius:16px;padding:14px 22px;min-width:92px}
-  .hstat b{display:block;font-size:1.7rem;font-weight:900;background:linear-gradient(180deg,#fff,#9ec7ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hstat span{font-size:.76rem;opacity:.85;font-weight:500}
+  header h1{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:900;letter-spacing:-1.5px;line-height:1.05;background:linear-gradient(180deg,#fff 40%,#bcd6ff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:fadeDown .9s .1s both}
+  header p{font-size:clamp(1rem,2.5vw,1.2rem);opacity:.9;margin-top:14px;font-weight:400;animation:fadeDown 1s .2s both}
   .wave{position:absolute;bottom:-1px;left:0;width:100%;line-height:0;z-index:2}
-  .wave svg{width:100%;height:60px;display:block}
+  .wave svg{width:100%;height:56px;display:block}
 
-  /* ===== NAV ===== */
-  nav{position:sticky;top:0;z-index:100;background:var(--glass);backdrop-filter:blur(16px) saturate(140%);
-    border-bottom:1px solid var(--glass-brd);box-shadow:0 4px 20px -10px rgba(0,40,130,.25)}
+  nav{position:sticky;top:0;z-index:100;background:var(--glass);backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid var(--glass-brd);box-shadow:0 4px 20px -10px rgba(0,40,130,.25)}
   .nav-inner{max-width:1120px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:11px 14px;scrollbar-width:none}
   .nav-inner::-webkit-scrollbar{display:none}
-  nav a{white-space:nowrap;text-decoration:none;color:var(--blue-d);font-weight:700;font-size:.9rem;
-    padding:9px 16px;border-radius:999px;transition:.25s;position:relative}
-  nav a:hover{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+  nav a{white-space:nowrap;text-decoration:none;color:var(--blue-d);font-weight:700;font-size:.9rem;padding:9px 16px;border-radius:999px;transition:.25s;cursor:pointer}
+  nav a:hover,nav a.active{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
 
-  main{max-width:1120px;margin:0 auto;padding:54px 18px 70px}
-  section{margin-bottom:58px;scroll-margin-top:80px}
-
-  .sec-title{display:flex;align-items:center;gap:16px;margin-bottom:28px}
-  .sec-title .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;flex-shrink:0;
-    background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:var(--shadow-sm);color:#fff}
+  main{max-width:1120px;margin:0 auto;padding:48px 18px 70px}
+  section{margin-bottom:54px;scroll-margin-top:80px}
+  .sec-title{display:flex;align-items:center;gap:16px;margin-bottom:26px}
+  .sec-title .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;flex-shrink:0;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:var(--shadow-sm);color:#fff}
   .sec-title .ico svg{width:26px;height:26px}
   .sec-title h2{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:var(--blue-dd);letter-spacing:-.5px}
   .sec-title .line{flex:1;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);border-radius:2px;margin-inline-start:6px}
 
-  /* reveal on scroll */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* ===== ROLE CARDS ===== */
-  .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:22px}
-  .role-card{position:relative;border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);
-    border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);overflow:hidden;
-    transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s}
-  .role-card::before{content:"";position:absolute;inset:0;padding:1.5px;border-radius:inherit;
-    background:linear-gradient(135deg,var(--cyan),transparent 40%,transparent 60%,var(--violet));
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
-    opacity:0;transition:opacity .35s}
-  .role-card:hover{transform:translateY(-8px)}
-  .role-card:hover::before{opacity:1}
-  .role-head{padding:20px 22px;display:flex;align-items:center;gap:13px;color:#fff;position:relative;
-    background:linear-gradient(135deg,var(--blue-d),var(--blue))}
-  .role-head .rdot{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.16);
-    display:grid;place-items:center;flex-shrink:0;font-size:1.2rem;border:1px solid rgba(255,255,255,.25)}
-  .role-head h3{font-size:1.18rem;font-weight:800}
-  .role-head .cnt{margin-inline-start:auto;font-size:.74rem;background:rgba(255,255,255,.22);padding:4px 11px;border-radius:999px;font-weight:800;min-width:46px;text-align:center;transition:background .3s}
-  .role-head.allDone .cnt{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.3)}
-  .role-body{padding:6px 0 10px}
-  .role-body ul{list-style:none}
-  .role-body li{padding:11px 22px;font-size:.93rem;display:flex;gap:11px;align-items:flex-start;cursor:pointer;user-select:none;
+  /* ===== ROLE SELECT CARDS (big, clickable) ===== */
+  .pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+  .pick-card{position:relative;border-radius:var(--radius);overflow:hidden;cursor:pointer;color:#fff;
+    padding:30px 26px;min-height:168px;display:flex;flex-direction:column;justify-content:space-between;
+    background:linear-gradient(145deg,var(--blue-d),var(--blue));box-shadow:var(--shadow-lg);
+    transition:transform .32s cubic-bezier(.2,.7,.3,1),box-shadow .32s;text-align:start}
+  .pick-card::after{content:"";position:absolute;inset:0;background:radial-gradient(400px 220px at 85% -20%,rgba(0,180,240,.55),transparent 60%);opacity:.8}
+  .pick-card:nth-child(2){background:linear-gradient(145deg,#0a3aa8,#1565d8)}
+  .pick-card:nth-child(3){background:linear-gradient(145deg,#1b3b9e,#4f63e8)}
+  .pick-card:nth-child(4){background:linear-gradient(145deg,#06246b,#0d4bb0)}
+  .pick-card:hover{transform:translateY(-9px) scale(1.015);box-shadow:0 30px 60px -20px rgba(0,40,130,.6)}
+  .pick-card .pc-top{position:relative;z-index:2;display:flex;align-items:center;gap:14px}
+  .pick-card .pc-emoji{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:1.7rem;flex-shrink:0;backdrop-filter:blur(6px)}
+  .pick-card h3{font-size:1.5rem;font-weight:900;letter-spacing:-.5px}
+  .pick-card .pc-bottom{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-top:20px}
+  .pick-card .pc-count{font-size:.86rem;opacity:.9;font-weight:600;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:999px}
+  .pick-card .pc-go{display:flex;align-items:center;gap:7px;font-weight:800;font-size:.95rem}
+  .pick-card .pc-go svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.5;transition:transform .25s}
+  .pick-card:hover .pc-go svg{transform:translateX(-5px)}
+  .pick-card .pc-prog{position:relative;z-index:2;margin-top:14px;height:7px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}
+  .pick-card .pc-prog i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--cyan-l),#fff);transition:width .5s}
+
+  /* ===== DETAIL VIEW ===== */
+  .detail{display:none}
+  .detail.show{display:block;animation:slideIn .4s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes slideIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+  .back-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--glass-brd);backdrop-filter:blur(10px);
+    color:var(--blue-dd);font-weight:800;font-size:.95rem;padding:11px 20px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .2s}
+  .back-btn:hover{transform:translateX(5px)}
+  .back-btn svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:2.5;transform:scaleX(-1)}
+  .detail-head{display:flex;align-items:center;gap:16px;padding:24px 26px;border-radius:var(--radius);color:#fff;
+    background:linear-gradient(135deg,var(--blue-d),var(--blue));box-shadow:var(--shadow-lg);margin-bottom:22px;position:relative;overflow:hidden}
+  .detail-head::after{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 88% -30%,rgba(0,180,240,.5),transparent 60%)}
+  .detail-head .dh-emoji{width:60px;height:60px;border-radius:18px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:1.9rem;flex-shrink:0;position:relative;z-index:2}
+  .detail-head .dh-txt{position:relative;z-index:2}
+  .detail-head h2{font-size:1.7rem;font-weight:900;letter-spacing:-.5px}
+  .detail-head .dh-sub{opacity:.88;font-size:.92rem;margin-top:2px}
+  .detail-head .dh-badge{margin-inline-start:auto;position:relative;z-index:2;text-align:center;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:10px 18px;min-width:88px;transition:background .3s}
+  .detail-head .dh-badge b{display:block;font-size:1.5rem;font-weight:900;line-height:1}
+  .detail-head .dh-badge span{font-size:.72rem;opacity:.9}
+  .detail-head.allDone .dh-badge{background:#22c55e;border-color:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.3)}
+
+  .checklist{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);overflow:hidden}
+  .checklist li{list-style:none;padding:16px 24px;font-size:1rem;display:flex;gap:14px;align-items:flex-start;cursor:pointer;user-select:none;
     border-bottom:1px solid rgba(0,60,160,.07);transition:background .2s,padding .2s}
-  .role-body li:last-child{border-bottom:none}
-  .role-body li:hover{background:linear-gradient(90deg,rgba(0,180,240,.1),transparent);padding-inline-start:28px}
-  /* empty checkbox by default */
-  .role-body li .tick{margin-top:2px;width:20px;height:20px;flex-shrink:0;border-radius:6px;
-    background:transparent;border:2px solid #b9cbe6;display:grid;place-items:center;transition:background .2s,border-color .2s,transform .15s}
-  .role-body li:hover .tick{border-color:var(--cyan)}
-  .role-body li .tick svg{width:12px;height:12px;stroke:#fff;stroke-width:3.2;fill:none;opacity:0;transform:scale(.4);transition:opacity .18s,transform .18s}
-  /* checked state */
-  .role-body li.done .tick{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;transform:scale(1.05)}
-  .role-body li.done .tick svg{opacity:1;transform:scale(1)}
-  .role-body li.done{color:#8a98ac}
-  .role-body li.done .txt{text-decoration:line-through;text-decoration-color:rgba(0,120,220,.5)}
+  .checklist li:last-child{border-bottom:none}
+  .checklist li:hover{background:linear-gradient(90deg,rgba(0,180,240,.1),transparent);padding-inline-start:30px}
+  .checklist li .box{margin-top:1px;width:24px;height:24px;flex-shrink:0;border-radius:7px;background:transparent;border:2px solid #b9cbe6;display:grid;place-items:center;transition:background .2s,border-color .2s,transform .15s}
+  .checklist li:hover .box{border-color:var(--cyan)}
+  .checklist li .box svg{width:14px;height:14px;stroke:#fff;stroke-width:3.2;fill:none;opacity:0;transform:scale(.4);transition:opacity .18s,transform .18s}
+  .checklist li.done .box{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;transform:scale(1.05)}
+  .checklist li.done .box svg{opacity:1;transform:scale(1)}
+  .checklist li.done .txt{color:#8a98ac;text-decoration:line-through;text-decoration-color:rgba(0,120,220,.5)}
+  .reset-row{display:flex;justify-content:flex-end;margin-top:16px}
+  .reset-btn{background:transparent;border:1.5px solid #c3d3ea;color:#5a6b86;font-weight:700;font-size:.86rem;padding:9px 18px;border-radius:999px;cursor:pointer;transition:.2s}
+  .reset-btn:hover{border-color:var(--blue);color:var(--blue);background:rgba(0,71,195,.05)}
 
-  /* ===== STATUS CHIPS ===== */
+  /* generic sections (status/systems/shifter/digital) */
   .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-  .chip{display:flex;align-items:center;gap:13px;padding:15px 18px;border-radius:16px;font-weight:700;
-    background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-brd);box-shadow:var(--shadow-sm);
-    transition:transform .25s,box-shadow .25s}
+  .chip{display:flex;align-items:center;gap:13px;padding:15px 18px;border-radius:16px;font-weight:700;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-brd);box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
   .chip:hover{transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-lg)}
-  .chip .num{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:.95rem;font-weight:900;
-    color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));flex-shrink:0;box-shadow:0 6px 14px -6px rgba(0,71,195,.6)}
+  .chip .num{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:.95rem;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));flex-shrink:0;box-shadow:0 6px 14px -6px rgba(0,71,195,.6)}
 
-  /* ===== PANELS ===== */
   .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
-  .panel{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);
-    border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);overflow:hidden;transition:transform .3s}
+  .panel{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);overflow:hidden;transition:transform .3s}
   .panel:hover{transform:translateY(-5px)}
-  .panel-head{padding:16px 20px;display:flex;align-items:center;gap:12px;color:#fff;font-weight:800;font-size:1.08rem;
-    background:linear-gradient(135deg,var(--blue-d),var(--blue))}
+  .panel-head{padding:16px 20px;display:flex;align-items:center;gap:12px;color:#fff;font-weight:800;font-size:1.08rem;background:linear-gradient(135deg,var(--blue-d),var(--blue))}
   .panel-head .ph-ic{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex-shrink:0}
   .panel-head .ph-ic svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2}
   .panel-head .mini{margin-inline-start:auto;font-size:.72rem;background:var(--cyan);padding:3px 11px;border-radius:999px;font-weight:800}
   .panel ul{list-style:none;padding:8px 0}
-  .panel li{padding:11px 20px;font-size:.92rem;display:flex;gap:11px;align-items:center;
-    border-bottom:1px solid rgba(0,60,160,.07);transition:background .2s}
+  .panel li{padding:11px 20px;font-size:.92rem;display:flex;gap:11px;align-items:center;border-bottom:1px solid rgba(0,60,160,.07);transition:background .2s}
   .panel li:last-child{border-bottom:none}
   .panel li:hover{background:linear-gradient(90deg,rgba(0,180,240,.1),transparent)}
   .panel li .d{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex-shrink:0}
-  .x2{display:inline-block;background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;font-size:.7rem;font-weight:900;
-    padding:2px 9px;border-radius:999px;margin-inline-start:7px;vertical-align:middle;box-shadow:0 4px 10px -4px rgba(91,110,245,.7)}
+  .x2{display:inline-block;background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;font-size:.7rem;font-weight:900;padding:2px 9px;border-radius:999px;margin-inline-start:7px;vertical-align:middle;box-shadow:0 4px 10px -4px rgba(91,110,245,.7)}
 
-  /* ===== DUAL ARROWS ===== */
-  .dual{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-brd);
-    box-shadow:var(--shadow-lg);padding:26px;margin-bottom:18px}
+  .dual{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);padding:26px;margin-bottom:18px}
   .dual-title{font-weight:900;color:var(--blue-dd);font-size:1.15rem;display:flex;align-items:center;gap:11px;margin-bottom:4px}
   .dual-title .dt-ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#fff;flex-shrink:0}
   .dual-sub{color:#5a6b86;font-size:.9rem;margin-bottom:18px;padding-inline-start:45px}
   .arrows{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .arrow-box{position:relative;border-radius:16px;padding:20px 18px 16px;
-    background:linear-gradient(135deg,rgba(0,71,195,.07),rgba(0,180,240,.07));border:1px solid rgba(0,120,220,.18);
-    transition:transform .25s,box-shadow .25s}
+  .arrow-box{position:relative;border-radius:16px;padding:20px 18px 16px;background:linear-gradient(135deg,rgba(0,71,195,.07),rgba(0,180,240,.07));border:1px solid rgba(0,120,220,.18);transition:transform .25s,box-shadow .25s}
   .arrow-box:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
-  .arrow-box .pill{position:absolute;top:-13px;inset-inline-start:16px;color:#fff;font-size:.72rem;font-weight:900;
-    padding:4px 13px;border-radius:999px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 6px 14px -5px rgba(0,71,195,.6)}
+  .arrow-box .pill{position:absolute;top:-13px;inset-inline-start:16px;color:#fff;font-size:.72rem;font-weight:900;padding:4px 13px;border-radius:999px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 6px 14px -5px rgba(0,71,195,.6)}
   .arrow-box strong{display:block;color:var(--blue-dd);font-size:1.02rem;margin:4px 0 3px;font-weight:800}
   .arrow-box span{font-size:.87rem;color:#5a6b86}
-  .note{background:linear-gradient(135deg,rgba(0,71,195,.06),rgba(0,180,240,.06));border-inline-start:4px solid var(--cyan);
-    border-radius:12px;padding:14px 18px;font-size:.9rem;color:#44536e;margin-top:18px;line-height:1.9}
+  .note{background:linear-gradient(135deg,rgba(0,71,195,.06),rgba(0,180,240,.06));border-inline-start:4px solid var(--cyan);border-radius:12px;padding:14px 18px;font-size:.9rem;color:#44536e;margin-top:18px;line-height:1.9}
   .note b{color:var(--blue-dd)}
 
-  /* ===== WOW TABLE ===== */
-  .wow-wrap{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-brd);
-    box-shadow:var(--shadow-lg);overflow:hidden}
-  .wow-banner{padding:20px 24px;color:#fff;font-weight:900;font-size:1.2rem;display:flex;align-items:center;gap:14px;
-    background:linear-gradient(135deg,var(--violet),var(--cyan))}
-  .wow-banner .wic{font-size:1.5rem}
-  .wow-banner .time{margin-inline-start:auto;background:rgba(255,255,255,.22);padding:5px 15px;border-radius:999px;font-size:.82rem;font-weight:700}
-  table{width:100%;border-collapse:collapse}
-  th,td{padding:15px 22px;text-align:right;font-size:.95rem}
-  thead th{background:rgba(0,71,195,.07);color:var(--blue-dd);font-weight:800;font-size:.82rem;letter-spacing:.3px}
-  tbody tr{border-top:1px solid rgba(0,60,160,.08);transition:background .2s}
-  tbody tr:hover{background:linear-gradient(90deg,rgba(0,180,240,.09),transparent)}
-  td:first-child{font-weight:700;color:var(--ink)}
-  .sol{display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-weight:800}
-  .sol::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan)}
-
-  footer{text-align:center;padding:40px 20px;color:#5a6b86;font-size:.86rem;
-    background:var(--glass);backdrop-filter:blur(12px);border-top:1px solid var(--glass-brd)}
+  footer{text-align:center;padding:40px 20px;color:#5a6b86;font-size:.86rem;background:var(--glass);backdrop-filter:blur(12px);border-top:1px solid var(--glass-brd)}
   footer .fdot{color:var(--cyan);font-size:1.1rem}
-  .toTop{position:fixed;bottom:22px;inset-inline-start:22px;width:50px;height:50px;border-radius:50%;z-index:90;
-    background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;border:none;cursor:pointer;display:grid;place-items:center;
-    box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+  .toTop{position:fixed;bottom:22px;inset-inline-start:22px;width:50px;height:50px;border-radius:50%;z-index:90;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;border:none;cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
   .toTop.show{opacity:1;pointer-events:auto}
   .toTop:hover{transform:translateY(-4px) scale(1.06)}
   .toTop svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.5}
 
   @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-  @media(max-width:560px){.arrows{grid-template-columns:1fr}.sec-title .ico{width:44px;height:44px}}
+  @media(max-width:560px){.arrows{grid-template-columns:1fr}.sec-title .ico{width:44px;height:44px}.detail-head{flex-wrap:wrap}.detail-head .dh-badge{margin-inline-start:0}}
 </style>
 </head>
 <body>
@@ -215,276 +177,257 @@
   <div class="hero-inner">
     <span class="kicker"><span class="pulse"></span> קיט חניכה · מוקד בזק</span>
     <h1>מדריך אחמ״ש</h1>
-    <p>כל המשימות, הסטטוסים והמערכות — במקום אחד, מסודר ונגיש</p>
-    <div class="hero-stats">
-      <div class="hstat"><b>4</b><span>תפקידים</span></div>
-      <div class="hstat"><b>9</b><span>סטטוסים</span></div>
-      <div class="hstat"><b>11</b><span>מערכות בוקר</span></div>
-      <div class="hstat"><b>4</b><span>CC Pulse</span></div>
-    </div>
+    <p>בחר תפקיד כדי לפתוח את הצ'קליסט הייעודי שלו</p>
   </div>
   <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#f0f5fc" d="M0,32L60,37.3C120,43,240,53,360,53.3C480,53,600,43,720,37.3C840,32,960,32,1080,34.7C1200,37,1320,43,1380,45.3L1440,48L1440,60L0,60Z"></path></svg></div>
 </header>
 
 <nav>
   <div class="nav-inner">
-    <a href="#roles">התפקידים</a>
-    <a href="#status">סטטוס חסימות</a>
-    <a href="#systems">מערכות בוקר</a>
-    <a href="#ccpulse">CC Pulse</a>
-    <a href="#shifter">שיפטר</a>
-    <a href="#digital">ערוצים דיגיטליים</a>
-    <a href="#wow">WOW Factor</a>
+    <a onclick="goHome()" class="nav-home">🏠 בית</a>
+    <a onclick="showSection('status')">סטטוס חסימות</a>
+    <a onclick="showSection('systems')">מערכות בוקר</a>
+    <a onclick="showSection('shifter')">שיפטר</a>
+    <a onclick="showSection('digital')">ערוצים דיגיטליים</a>
   </div>
 </nav>
 
 <main>
 
-  <!-- ROLES -->
-  <section id="roles">
-    <div class="sec-title reveal">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-      <h2>ארבעת התפקידים</h2><span class="line"></span>
-    </div>
-    <div class="roles">
+  <!-- ===== HOME ===== -->
+  <div id="home">
 
-      <div class="role-card reveal">
-        <div class="role-head"><span class="rdot">⚡</span><h3>אחמ״ש זמינות</h3><span class="cnt">11</span></div>
-        <div class="role-body"><ul>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת לוגין כל שעה עגולה</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת סקילים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת חסימות מיותרות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת ברוטו צוותי כל שעה וחצי / שעתיים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקה שזמני ההפסקות לא חורגים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת אישיות גבוהות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקה של אחוז פעילות טלפונית</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת מיילים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>לדווח בקובץ נטרולים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>לעדכן בקובץ סיכום משמרת</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת סטטוס 16 (ברוטו + תקנה + מכירות)</li>
-        </ul></div>
+    <section id="roles-pick">
+      <div class="sec-title reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <h2>בחר תפקיד</h2><span class="line"></span>
       </div>
+      <div class="pick" id="pickGrid"><!-- filled by JS --></div>
+    </section>
 
-      <div class="role-card reveal">
-        <div class="role-head"><span class="rdot">🛠️</span><h3>אחמ״ש תפעול</h3><span class="cnt">12</span></div>
-        <div class="role-body"><ul>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>סימון נוכחות בשיפטר</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שחרור שלוחות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת לוגין של יום קודם (פורטל BI)</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>סטטוס בוקר + צהריים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>הפסקות בכירים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>דוח יומי אור-לי</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>הערכות למחר — חמישי</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת מוניות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקה כל הזמן על תור דיגיטל / בכירים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת גורמות של אתמול לולרי</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>החלפות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת מיילים</li>
-        </ul></div>
+    <section id="status">
+      <div class="sec-title reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <h2>סטטוס חסימות</h2><span class="line"></span>
       </div>
-
-      <div class="role-card reveal">
-        <div class="role-head"><span class="rdot">🔄</span><h3>אחמ״ש מסתובב</h3><span class="cnt">9</span></div>
-        <div class="role-body"><ul>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>ב-08:00 בדיקה שכולם העלו מערכת</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>תפעול תקלות מהבית</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>לוודא שהספארק פתוח לנציגים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>לוודא שכולם ביצעו כניסה בשיפטר</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שיחות ארוכות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>מכירות (התחברות לנציגים)</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>החלפת הפסקות בבמה</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>התנהלות שוטפת מול אחמ״ש זמינות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>אחראי שירים :)</li>
-        </ul></div>
+      <div class="chips reveal">
+        <div class="chip"><span class="num">1</span> זמין / לא זמין</div>
+        <div class="chip"><span class="num">2</span> אישי</div>
+        <div class="chip"><span class="num">3</span> הפסקה</div>
+        <div class="chip"><span class="num">4</span> עורף</div>
+        <div class="chip"><span class="num">5</span> דיגיטל</div>
+        <div class="chip"><span class="num">6</span> הדרכות</div>
+        <div class="chip"><span class="num">7</span> מאגרים</div>
+        <div class="chip"><span class="num">8</span> משוב</div>
+        <div class="chip"><span class="num">NA</span> ללא סיבה</div>
       </div>
+    </section>
 
-      <div class="role-card reveal">
-        <div class="role-head"><span class="rdot">🌙</span><h3>אחמ״ש ערב</h3><span class="cnt">11</span></div>
-        <div class="role-body"><ul>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת לוגין כל שעה</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>בדיקת סקילים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>דיווח חניכה</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>דוח התנהלות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>סגירת משמרות ערב</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>תפעול עבודה מהבית</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת ברוטו כל שעה וחצי / שעתיים</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>דיווח מכירות</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת קובץ נטרולים לבמה מרכזית</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>סימון מפוצלות בשיפטר</li>
-          <li><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>שליחת סיום יום לסגל (ברוטו 16+20, מכירות, סיכום משמרת, משמרות ערב)</li>
-        </ul></div>
+    <section id="systems">
+      <div class="sec-title reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+        <h2>מערכות להעלאה בבוקר</h2><span class="line"></span>
       </div>
-
-    </div>
-  </section>
-
-  <!-- STATUS -->
-  <section id="status">
-    <div class="sec-title reveal">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-      <h2>סטטוס חסימות</h2><span class="line"></span>
-    </div>
-    <div class="chips reveal">
-      <div class="chip"><span class="num">1</span> זמין / לא זמין</div>
-      <div class="chip"><span class="num">2</span> אישי</div>
-      <div class="chip"><span class="num">3</span> הפסקה</div>
-      <div class="chip"><span class="num">4</span> עורף</div>
-      <div class="chip"><span class="num">5</span> דיגיטל</div>
-      <div class="chip"><span class="num">6</span> הדרכות</div>
-      <div class="chip"><span class="num">7</span> מאגרים</div>
-      <div class="chip"><span class="num">8</span> משוב</div>
-      <div class="chip"><span class="num">NA</span> ללא סיבה</div>
-    </div>
-  </section>
-
-  <!-- SYSTEMS -->
-  <section id="systems">
-    <div class="sec-title reveal">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
-      <h2>מערכות להעלאה בבוקר</h2><span class="line"></span>
-    </div>
-    <div class="cols">
-
-      <div class="panel reveal">
-        <div class="panel-head"><span class="ph-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> מערכות</div>
-        <ul>
-          <li><span class="d"></span>שיפטר <span class="x2">×2</span></li>
-          <li><span class="d"></span>ערוצים דיגיטליים <span class="x2">×2</span></li>
-          <li><span class="d"></span>ספארק</li>
-          <li><span class="d"></span>מערכת MENI</li>
-          <li><span class="d"></span>מערכת CM</li>
-          <li><span class="d"></span>מייל</li>
-          <li><span class="d"></span>PRV Home Agent</li>
-          <li><span class="d"></span>פורטל BI</li>
-          <li><span class="d"></span>גט טקסי</li>
-          <li><span class="d"></span>וואטסאפ ווב</li>
-          <li><span class="d"></span>דוחות במה (סיכום משמרת + נטרולים)</li>
-        </ul>
+      <div class="cols">
+        <div class="panel reveal">
+          <div class="panel-head"><span class="ph-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> מערכות</div>
+          <ul>
+            <li><span class="d"></span>שיפטר <span class="x2">×2</span></li>
+            <li><span class="d"></span>ערוצים דיגיטליים <span class="x2">×2</span></li>
+            <li><span class="d"></span>ספארק</li>
+            <li><span class="d"></span>מערכת MENI</li>
+            <li><span class="d"></span>מערכת CM</li>
+            <li><span class="d"></span>מייל</li>
+            <li><span class="d"></span>PRV Home Agent</li>
+            <li><span class="d"></span>פורטל BI</li>
+            <li><span class="d"></span>גט טקסי</li>
+            <li><span class="d"></span>וואטסאפ ווב</li>
+            <li><span class="d"></span>דוחות במה (סיכום משמרת + נטרולים)</li>
+          </ul>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-head"><span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span> מערכות CC Pulse <span class="mini">4 להעלאה</span></div>
+          <ul>
+            <li><span class="d"></span>PRV_CCPluse8 — איחוד שעתי 1</li>
+            <li><span class="d"></span>Binf-DTL-CCPluse8 — נתונים מסחרי ירושלים</li>
+            <li><span class="d"></span>199-Agents-CCPluse8 — חריגים ירושלים חדש</li>
+            <li><span class="d"></span>199-Agents-CCPluse8 — ירושלים זמן שיחה נציג 1</li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="panel reveal" id="ccpulse">
-        <div class="panel-head"><span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span> מערכות CC Pulse <span class="mini">4 להעלאה</span></div>
-        <ul>
-          <li><span class="d"></span>PRV_CCPluse8 — איחוד שעתי 1</li>
-          <li><span class="d"></span>Binf-DTL-CCPluse8 — נתונים מסחרי ירושלים</li>
-          <li><span class="d"></span>199-Agents-CCPluse8 — חריגים ירושלים חדש</li>
-          <li><span class="d"></span>199-Agents-CCPluse8 — ירושלים זמן שיחה נציג 1</li>
-        </ul>
+    <section id="shifter">
+      <div class="sec-title reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+        <h2>שיפטר — שני חצים</h2><span class="line"></span>
       </div>
-
-    </div>
-  </section>
-
-  <!-- SHIFTER -->
-  <section id="shifter">
-    <div class="sec-title reveal">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-      <h2>שיפטר — שני חצים</h2><span class="line"></span>
-    </div>
-    <div class="dual reveal">
-      <div class="dual-title"><span class="dt-ic">📌</span> פתיחה פעמיים</div>
-      <div class="dual-sub">חץ אחד מופנה לניהול נוכחות, השני לניהול משמרות</div>
-      <div class="arrows">
-        <div class="arrow-box"><span class="pill">חץ 1</span><strong>ניהול נוכחות</strong><span>סימון במשבצות הגעה + תדריך</span></div>
-        <div class="arrow-box"><span class="pill">חץ 2</span><strong>ניהול משמרות</strong><span>שחרור שלוחות</span></div>
+      <div class="dual reveal">
+        <div class="dual-title"><span class="dt-ic">📌</span> פתיחה פעמיים</div>
+        <div class="dual-sub">חץ אחד מופנה לניהול נוכחות, השני לניהול משמרות</div>
+        <div class="arrows">
+          <div class="arrow-box"><span class="pill">חץ 1</span><strong>ניהול נוכחות</strong><span>סימון במשבצות הגעה + תדריך</span></div>
+          <div class="arrow-box"><span class="pill">חץ 2</span><strong>ניהול משמרות</strong><span>שחרור שלוחות</span></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- DIGITAL -->
-  <section id="digital">
-    <div class="sec-title reveal">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
-      <h2>ערוצים דיגיטליים (גלאסיקס)</h2><span class="line"></span>
-    </div>
-    <div class="dual reveal">
-      <div class="dual-title"><span class="dt-ic">📌</span> שני חצים</div>
-      <div class="dual-sub">חץ אחד לניהול נוכחות, השני לניהול משמרות</div>
-      <div class="arrows">
-        <div class="arrow-box"><span class="pill">חץ 1</span><strong>תור דיגיטל</strong><span>חוצץ שיחות של כולם</span></div>
-        <div class="arrow-box"><span class="pill">חץ 2</span><strong>תור מומחי שירות</strong><span>חוצץ שיחות בתור</span></div>
+    <section id="digital">
+      <div class="sec-title reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+        <h2>ערוצים דיגיטליים (גלאסיקס)</h2><span class="line"></span>
       </div>
-      <div class="note">
-        <b>מחלקות בגלאסיקס:</b><br>
-        • תור מומחי שירות — מומחי שירות טכני + מסחרי<br>
-        • תור דיגיטל — אגף שירות ותמיכה · טכני
+      <div class="dual reveal">
+        <div class="dual-title"><span class="dt-ic">📌</span> שני חצים</div>
+        <div class="dual-sub">חץ אחד לניהול נוכחות, השני לניהול משמרות</div>
+        <div class="arrows">
+          <div class="arrow-box"><span class="pill">חץ 1</span><strong>תור דיגיטל</strong><span>חוצץ שיחות של כולם</span></div>
+          <div class="arrow-box"><span class="pill">חץ 2</span><strong>תור מומחי שירות</strong><span>חוצץ שיחות בתור</span></div>
+        </div>
+        <div class="note">
+          <b>מחלקות בגלאסיקס:</b><br>
+          • תור מומחי שירות — מומחי שירות טכני + מסחרי<br>
+          • תור דיגיטל — אגף שירות ותמיכה · טכני
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- WOW -->
-  <section id="wow">
-    <div class="sec-title reveal">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-      <h2>WOW Factor</h2><span class="line"></span>
+  </div>
+
+  <!-- ===== DETAIL (single role) ===== -->
+  <div id="detail" class="detail">
+    <div class="back-bar">
+      <button class="back-btn" onclick="goHome()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> חזרה לכל התפקידים</button>
     </div>
-    <div class="wow-wrap reveal">
-      <div class="wow-banner"><span class="wic">💡</span> משימות יצירתיות <span class="time">⏱️ משימת 3 דקות</span></div>
-      <table>
-        <thead><tr><th>משימה</th><th>פתרון</th></tr></thead>
-        <tbody>
-          <tr><td>גזירת כוכב</td><td><span class="sol">מספריים</span></td></tr>
-          <tr><td>מגדל</td><td><span class="sol">כוסות</span></td></tr>
-          <tr><td>מילוי קערת מים עם פקק</td><td><span class="sol">בקבוקים</span></td></tr>
-          <tr><td>תרגיל מתמטי מסובך</td><td><span class="sol">מחשבון</span></td></tr>
-          <tr><td>רשימה של ראשי ממשלה לפי הסדר</td><td><span class="sol">GPT</span></td></tr>
-        </tbody>
-      </table>
+    <div class="detail-head" id="dHead">
+      <span class="dh-emoji" id="dEmoji"></span>
+      <div class="dh-txt"><h2 id="dTitle"></h2><div class="dh-sub">סמן משימות שביצעת · הסימון נשמר אוטומטית</div></div>
+      <div class="dh-badge"><b id="dCount">0/0</b><span>הושלמו</span></div>
     </div>
-  </section>
+    <ul class="checklist" id="dList"></ul>
+    <div class="reset-row"><button class="reset-btn" onclick="resetRole()">↺ אפס סימונים לתפקיד זה</button></div>
+  </div>
 
 </main>
 
-<footer>
-  מדריך אחמ״ש · מוקד בזק &nbsp;<span class="fdot">◆</span>&nbsp; נבנה לצורכי חניכה פנימית
-</footer>
-
+<footer>מדריך אחמ״ש · מוקד בזק &nbsp;<span class="fdot">◆</span>&nbsp; נבנה לצורכי חניכה פנימית</footer>
 <button class="toTop" id="toTop" aria-label="חזרה למעלה"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
 
 <script>
-  // scroll reveal
+  // ===== DATA =====
+  const ROLES=[
+    {id:"zminut",emoji:"⚡",name:"אחמ״ש זמינות",tasks:[
+      "בדיקת לוגין כל שעה עגולה","בדיקת סקילים","בדיקת חסימות מיותרות",
+      "שליחת ברוטו צוותי כל שעה וחצי / שעתיים","בדיקה שזמני ההפסקות לא חורגים",
+      "שליחת אישיות גבוהות","בדיקה של אחוז פעילות טלפונית","בדיקת מיילים",
+      "לדווח בקובץ נטרולים","לעדכן בקובץ סיכום משמרת","שליחת סטטוס 16 (ברוטו + תקנה + מכירות)"]},
+    {id:"tiful",emoji:"🛠️",name:"אחמ״ש תפעול",tasks:[
+      "סימון נוכחות בשיפטר","שחרור שלוחות","בדיקת לוגין של יום קודם (פורטל BI)",
+      "סטטוס בוקר + צהריים","הפסקות בכירים","דוח יומי אור-לי","הערכות למחר — חמישי",
+      "שליחת מוניות","בדיקה כל הזמן על תור דיגיטל / בכירים","שליחת גורמות של אתמול לולרי",
+      "החלפות","בדיקת מיילים"]},
+    {id:"mistovev",emoji:"🔄",name:"אחמ״ש מסתובב",tasks:[
+      "ב-08:00 בדיקה שכולם העלו מערכת","תפעול תקלות מהבית","לוודא שהספארק פתוח לנציגים",
+      "לוודא שכולם ביצעו כניסה בשיפטר","שיחות ארוכות","מכירות (התחברות לנציגים)",
+      "החלפת הפסקות בבמה","התנהלות שוטפת מול אחמ״ש זמינות","אחראי שירים :)"]},
+    {id:"erev",emoji:"🌙",name:"אחמ״ש ערב",tasks:[
+      "בדיקת לוגין כל שעה","בדיקת סקילים","דיווח חניכה","דוח התנהלות","סגירת משמרות ערב",
+      "תפעול עבודה מהבית","שליחת ברוטו כל שעה וחצי / שעתיים","דיווח מכירות",
+      "שליחת קובץ נטרולים לבמה מרכזית","סימון מפוצלות בשיפטר",
+      "שליחת סיום יום לסגל (ברוטו 16+20, מכירות, סיכום משמרת, משמרות ערב)"]}
+  ];
+
+  const STORE='achmash_checks_v2';
+  let saved={};
+  try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){saved={}}
+  const save=()=>{try{localStorage.setItem(STORE,JSON.stringify(saved))}catch(e){}};
+  const CHECK='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+  let current=null;
+
+  function doneCount(r){return r.tasks.reduce((n,_,i)=>n+(saved[r.id+'_'+i]?1:0),0)}
+
+  // build home pick cards
+  const grid=document.getElementById('pickGrid');
+  ROLES.forEach(r=>{
+    const card=document.createElement('div');
+    card.className='pick-card';
+    card.onclick=()=>openRole(r.id);
+    card.innerHTML=`
+      <div class="pc-top"><span class="pc-emoji">${r.emoji}</span><h3>${r.name}</h3></div>
+      <div class="pc-prog"><i data-prog="${r.id}"></i></div>
+      <div class="pc-bottom">
+        <span class="pc-count" data-cnt="${r.id}"></span>
+        <span class="pc-go">פתח צ'קליסט <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  function refreshCards(){
+    ROLES.forEach(r=>{
+      const d=doneCount(r),t=r.tasks.length;
+      const cnt=document.querySelector(`[data-cnt="${r.id}"]`);
+      const prog=document.querySelector(`[data-prog="${r.id}"]`);
+      if(cnt) cnt.textContent=`${d}/${t} משימות`;
+      if(prog) prog.style.width=(t?d/t*100:0)+'%';
+    });
+  }
+
+  function openRole(id){
+    const r=ROLES.find(x=>x.id===id); if(!r)return; current=r;
+    document.getElementById('dEmoji').textContent=r.emoji;
+    document.getElementById('dTitle').textContent=r.name;
+    const list=document.getElementById('dList'); list.innerHTML='';
+    r.tasks.forEach((t,i)=>{
+      const key=r.id+'_'+i;
+      const li=document.createElement('li');
+      if(saved[key]) li.classList.add('done');
+      li.innerHTML=`<span class="box">${CHECK}</span><span class="txt">${t}</span>`;
+      li.onclick=()=>{
+        li.classList.toggle('done');
+        if(li.classList.contains('done')) saved[key]=1; else delete saved[key];
+        save(); updateDetailCount();
+      };
+      list.appendChild(li);
+    });
+    updateDetailCount();
+    document.getElementById('home').style.display='none';
+    document.getElementById('detail').classList.add('show');
+    scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function updateDetailCount(){
+    if(!current)return;
+    const d=doneCount(current),t=current.tasks.length;
+    document.getElementById('dCount').textContent=`${d}/${t}`;
+    document.getElementById('dHead').classList.toggle('allDone',d===t&&t>0);
+  }
+
+  function resetRole(){
+    if(!current)return;
+    current.tasks.forEach((_,i)=>delete saved[current.id+'_'+i]);
+    save(); openRole(current.id);
+  }
+
+  function goHome(){
+    document.getElementById('detail').classList.remove('show');
+    document.getElementById('home').style.display='block';
+    refreshCards();
+    scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function showSection(id){
+    goHome();
+    setTimeout(()=>document.getElementById(id).scrollIntoView({behavior:'smooth'}),60);
+  }
+
+  refreshCards();
+
+  // reveal + back-to-top
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
-  // back to top
   const btn=document.getElementById('toTop');
   addEventListener('scroll',()=>{btn.classList.toggle('show',scrollY>500)});
   btn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
-
-  // ===== interactive checkboxes for role tasks =====
-  const STORE='achmash_checks_v1';
-  let saved={};
-  try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){saved={}}
-  function save(){try{localStorage.setItem(STORE,JSON.stringify(saved))}catch(e){}}
-
-  document.querySelectorAll('.role-card').forEach((card,ci)=>{
-    const head=card.querySelector('.role-head');
-    const cnt=card.querySelector('.cnt');
-    const items=card.querySelectorAll('.role-body li');
-    // wrap bare text nodes in .txt span (so strike-through targets text only)
-    items.forEach((li,li_i)=>{
-      const key='c'+ci+'_'+li_i;
-      li.dataset.key=key;
-      // move trailing text nodes into a span
-      const span=document.createElement('span');
-      span.className='txt';
-      const kids=Array.from(li.childNodes);
-      kids.forEach(n=>{ if(n.nodeType===3 || (n.nodeType===1 && !n.classList.contains('tick'))) span.appendChild(n); });
-      li.appendChild(span);
-      if(saved[key]) li.classList.add('done');
-      li.addEventListener('click',()=>{
-        li.classList.toggle('done');
-        saved[key]=li.classList.contains('done');
-        if(!saved[key]) delete saved[key];
-        save(); updateCount();
-      });
-    });
-    function updateCount(){
-      const done=card.querySelectorAll('.role-body li.done').length;
-      cnt.textContent=done+'/'+items.length;
-      head.classList.toggle('allDone',done===items.length && items.length>0);
-    }
-    updateCount();
-  });
 </script>
 
 </body>
