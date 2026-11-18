@@ -76,6 +76,8 @@
   .pick-card:nth-child(2){background:linear-gradient(145deg,#0a3aa8,#1565d8)}
   .pick-card:nth-child(3){background:linear-gradient(145deg,#1b3b9e,#4f63e8)}
   .pick-card:nth-child(4){background:linear-gradient(145deg,#06246b,#0d4bb0)}
+  .pick-card.guide-card{background:linear-gradient(145deg,#0a4f6b,#00a0d8)}
+  .pick-card.guide-card::after{background:radial-gradient(400px 220px at 85% -20%,rgba(82,212,255,.5),transparent 60%)}
   .pick-card:hover{transform:translateY(-9px) scale(1.015);box-shadow:0 30px 60px -20px rgba(0,40,130,.6)}
   .pick-card .pc-top{position:relative;z-index:2;display:flex;align-items:center;gap:14px}
   .pick-card .pc-emoji{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:1.7rem;flex-shrink:0;backdrop-filter:blur(6px)}
@@ -188,6 +190,12 @@
   .gimg{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow-sm);margin:8px 0;cursor:zoom-in;transition:transform .2s,box-shadow .2s}
   .gimg:hover{transform:scale(1.01);box-shadow:var(--shadow-lg)}
   .gimg.small{max-width:260px}
+  /* two-step flow with arrow, equal heights */
+  .gflow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0}
+  .gflow .flowimg{flex:1 1 0;min-width:220px;height:200px;object-fit:contain;background:#fff;margin:0}
+  .gflow-arrow{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:var(--shadow-sm)}
+  .gflow-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.5}
+  @media(max-width:560px){.gflow{flex-direction:column}.gflow .flowimg{width:100%;height:auto;max-height:240px}.gflow-arrow{transform:rotate(-90deg)}}
   /* lightbox */
   .lb{position:fixed;inset:0;z-index:200;background:rgba(2,10,30,.9);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;backdrop-filter:blur(4px)}
   .lb.show{display:flex}
@@ -221,7 +229,6 @@
 <nav>
   <div class="nav-inner">
     <a onclick="goHome()" class="nav-home">🏠 בית</a>
-    <a onclick="showSection('login-check')">מדריך מערכות</a>
     <a onclick="showSection('status')">סטטוס חסימות</a>
     <a onclick="showSection('systems')">מערכות בוקר</a>
   </div>
@@ -273,8 +280,11 @@
 
         <div class="gstep"><h4>🔓 שחרור שלוחות</h4>
           <div class="gsub">הקצאת/שחרור שלוחה למשמרת ← עדכון מיקום משמרת (בזק מוקד)</div>
-          <img class="gimg" src="images/release-ext-toolbar.png" alt="סרגל שחרור שלוחה" loading="lazy">
-          <img class="gimg" src="images/release-ext-location.jpg" alt="עדכון מיקום משמרת" loading="lazy">
+          <div class="gflow">
+            <img class="gimg flowimg" src="images/release-ext-toolbar.png" alt="סרגל שחרור שלוחה" loading="lazy">
+            <div class="gflow-arrow"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+            <img class="gimg flowimg" src="images/release-ext-location.jpg" alt="עדכון מיקום משמרת" loading="lazy">
+          </div>
         </div>
 
       </div>
@@ -396,7 +406,7 @@
       "בדיקת לוגין כל שעה","בדיקת סקילים","דיווח חניכה","דוח התנהלות","סגירת משמרות ערב",
       "תפעול עבודה מהבית","שליחת ברוטו כל שעה וחצי / שעתיים","דיווח מכירות",
       "שליחת קובץ נטרולים לבמה מרכזית","סימון מפוצלות בשיפטר",
-      "שליחת סיום יום לסגל (ברוטו 16+20, מכירות, סיכום משמרת, משמרות ערב)"]}
+      "שליחת סיום יום לסגל (ברוטו 16+20, מכירות, סיכום משמרת, משמרות ערב)","פרואקטיבי למחר"]}
   ];
 
   const STORE='achmash_checks_v2';
@@ -423,6 +433,43 @@
       </div>`;
     grid.appendChild(card);
   });
+
+  // extra pick-card: מדריך מערכות (opens the visual guide view)
+  (function(){
+    const card=document.createElement('div');
+    card.className='pick-card guide-card';
+    card.onclick=openGuide;
+    card.innerHTML=`
+      <div class="pc-top"><span class="pc-emoji">🖥️</span><h3>מדריך מערכות</h3></div>
+      <div class="pc-bottom">
+        <span class="pc-count">לוגין · שיפטר · גלאסיקס · גט טקסי · שלוחות</span>
+        <span class="pc-go">פתח מדריך <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      </div>`;
+    grid.appendChild(card);
+  })();
+
+  // move the guide section out of #home so it can act as its own view, hidden by default
+  (function(){
+    const g=document.getElementById('login-check');
+    const home=document.getElementById('home');
+    if(g && home && home.contains(g)){
+      home.parentNode.insertBefore(g, home.nextSibling);
+      g.style.display='none';
+      // prepend a back button
+      const bar=document.createElement('div');
+      bar.className='back-bar';
+      bar.innerHTML='<button class="back-btn" onclick="goHome()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> חזרה</button>';
+      g.insertBefore(bar, g.firstChild);
+    }
+  })();
+
+  function openGuide(){
+    document.getElementById('home').style.display='none';
+    document.getElementById('detail').classList.remove('show');
+    const g=document.getElementById('login-check');
+    g.style.display='block';
+    scrollTo({top:0,behavior:'smooth'});
+  }
 
   function refreshCards(){
     ROLES.forEach(r=>{
@@ -472,6 +519,7 @@
 
   function goHome(){
     document.getElementById('detail').classList.remove('show');
+    const g=document.getElementById('login-check'); if(g) g.style.display='none';
     document.getElementById('home').style.display='block';
     refreshCards();
     scrollTo({top:0,behavior:'smooth'});
