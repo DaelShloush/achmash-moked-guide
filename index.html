@@ -178,6 +178,21 @@
   .note{background:linear-gradient(135deg,rgba(0,71,195,.06),rgba(0,180,240,.06));border-inline-start:4px solid var(--cyan);border-radius:12px;padding:14px 18px;font-size:.9rem;color:#44536e;margin-top:18px;line-height:1.9}
   .note b{color:var(--blue-dd)}
 
+  /* login-check visual guide */
+  .guide{border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);padding:22px}
+  .guide-sub{color:#5a6b86;font-size:.9rem;margin-bottom:16px;font-weight:600}
+  .gstep{padding:14px 0;border-bottom:1px solid rgba(0,60,160,.08)}
+  .gstep:last-child{border-bottom:none}
+  .gstep h4{color:var(--blue-dd);font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .gsub{color:#5a6b86;font-size:.85rem;margin-bottom:10px}
+  .gimg{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow-sm);margin:8px 0;cursor:zoom-in;transition:transform .2s,box-shadow .2s}
+  .gimg:hover{transform:scale(1.01);box-shadow:var(--shadow-lg)}
+  .gimg.small{max-width:260px}
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(2,10,30,.9);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;backdrop-filter:blur(4px)}
+  .lb.show{display:flex}
+  .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+
   footer{text-align:center;padding:40px 20px;color:#5a6b86;font-size:.86rem;background:var(--glass);backdrop-filter:blur(12px);border-top:1px solid var(--glass-brd)}
   footer .fdot{color:var(--cyan);font-size:1.1rem}
   .toTop{position:fixed;bottom:22px;inset-inline-start:22px;width:50px;height:50px;border-radius:50%;z-index:90;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;border:none;cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
@@ -206,6 +221,7 @@
 <nav>
   <div class="nav-inner">
     <a onclick="goHome()" class="nav-home">🏠 בית</a>
+    <a onclick="showSection('login-check')">בדיקת לוגין</a>
     <a onclick="showSection('status')">סטטוס חסימות</a>
     <a onclick="showSection('systems')">מערכות בוקר</a>
   </div>
@@ -222,6 +238,46 @@
         <h2>בחר תפקיד</h2><span class="line"></span>
       </div>
       <div class="pick" id="pickGrid"><!-- filled by JS --></div>
+    </section>
+
+    <section id="login-check">
+      <div class="sec-title reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <h2>בדיקת לוגין</h2><span class="line"></span>
+      </div>
+      <div class="guide reveal">
+        <div class="guide-sub">מדריך ויזואלי — לחץ על תמונה להגדלה</div>
+
+        <div class="gstep"><h4>🔍 בדיקת לוגין</h4>
+          <div class="gsub">פורטל ← אינפרנט ← יעילות תפעולית ← “לוגין מפורט - החל מ-2026”</div>
+          <img class="gimg" src="images/login-portal.png" alt="בדיקת לוגין בפורטל" loading="lazy">
+        </div>
+
+        <div class="gstep"><h4>🗜️ שיפטר — ניהול נוכחות</h4>
+          <img class="gimg small" src="images/shifter-presence.png" alt="ניהול נוכחות" loading="lazy">
+        </div>
+
+        <div class="gstep"><h4>🗜️ שיפטר — ניהול משמרות</h4>
+          <img class="gimg small" src="images/shifter-shifts.png" alt="ניהול משמרות" loading="lazy">
+        </div>
+
+        <div class="gstep"><h4>💬 מחלקות גלאסיקס — מומחי שירות / דיגיטל</h4>
+          <img class="gimg" src="images/glassix-depts.png" alt="מחלקות גלאסיקס" loading="lazy">
+          <img class="gimg" src="images/glassix-queues.png" alt="תורי גלאסיקס" loading="lazy">
+        </div>
+
+        <div class="gstep"><h4>🚕 גט טקסי (GET TEXI)</h4>
+          <div class="gsub">במה מוקד 199 חד“ר ← CCP ← GET TEXI</div>
+          <img class="gimg small" src="images/get-taxi.png" alt="גט טקסי" loading="lazy">
+        </div>
+
+        <div class="gstep"><h4>🔓 שחרור שלוחות</h4>
+          <div class="gsub">הקצאת/שחרור שלוחה למשמרת ← עדכון מיקום משמרת (בזק מוקד)</div>
+          <img class="gimg" src="images/release-ext-toolbar.png" alt="סרגל שחרור שלוחה" loading="lazy">
+          <img class="gimg" src="images/release-ext-location.png" alt="עדכון מיקום משמרת" loading="lazy">
+        </div>
+
+      </div>
     </section>
 
     <section id="status">
@@ -317,6 +373,7 @@
 
 <footer>מדריך אחמ״ש · מוקד בזק &nbsp;<span class="fdot">◆</span>&nbsp; נבנה לצורכי חניכה פנימית</footer>
 <button class="toTop" id="toTop" aria-label="חזרה למעלה"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+<div class="lb" id="lb"><img id="lbimg" src="" alt="תצוגה מוגדלת"></div>
 
 <script>
   // ===== DATA =====
@@ -441,6 +498,14 @@
   const btn=document.getElementById('toTop');
   addEventListener('scroll',()=>{btn.classList.toggle('show',scrollY>500)});
   btn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+  // lightbox for guide images
+  const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg');
+  document.addEventListener('click',e=>{
+    const g=e.target.closest('.gimg');
+    if(g){lbimg.src=g.src;lb.classList.add('show');}
+    else if(e.target.closest('#lb')){lb.classList.remove('show');lbimg.src='';}
+  });
 </script>
 
 </body>
