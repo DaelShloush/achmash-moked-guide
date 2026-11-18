@@ -76,8 +76,21 @@
   .pick-card:nth-child(2){background:linear-gradient(145deg,#0a3aa8,#1565d8)}
   .pick-card:nth-child(3){background:linear-gradient(145deg,#1b3b9e,#4f63e8)}
   .pick-card:nth-child(4){background:linear-gradient(145deg,#06246b,#0d4bb0)}
-  .pick-card.guide-card{background:linear-gradient(145deg,#0a4f6b,#00a0d8)}
-  .pick-card.guide-card::after{background:radial-gradient(400px 220px at 85% -20%,rgba(82,212,255,.5),transparent 60%)}
+  /* wide guide card below the roles grid */
+  .guide-card-wide{position:relative;overflow:hidden;cursor:pointer;color:#fff;border-radius:var(--radius);
+    margin-top:22px;padding:30px 28px;min-height:120px;
+    background:linear-gradient(135deg,#5b2db0,#00a0d8 85%);box-shadow:var(--shadow-lg);
+    transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
+  .guide-card-wide::after{content:"";position:absolute;inset:0;background:radial-gradient(500px 260px at 88% -25%,rgba(255,255,255,.28),transparent 60%)}
+  .guide-card-wide:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 30px 60px -20px rgba(45,20,130,.55)}
+  .gcw-top{position:relative;z-index:2;display:flex;align-items:center;gap:18px}
+  .gcw-emoji{width:66px;height:66px;border-radius:18px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.32);display:grid;place-items:center;font-size:2rem;flex-shrink:0;backdrop-filter:blur(6px)}
+  .guide-card-wide h3{font-size:1.7rem;font-weight:900;letter-spacing:-.5px}
+  .gcw-sub{font-size:.9rem;opacity:.92;font-weight:500}
+  .gcw-go{margin-inline-start:auto;display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.02rem;white-space:nowrap}
+  .gcw-go svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.5;transition:transform .25s}
+  .guide-card-wide:hover .gcw-go svg{transform:translateX(-5px)}
+  @media(max-width:560px){.gcw-top{flex-wrap:wrap}.gcw-go{margin-inline-start:0}.guide-card-wide h3{font-size:1.4rem}}
   .pick-card:hover{transform:translateY(-9px) scale(1.015);box-shadow:0 30px 60px -20px rgba(0,40,130,.6)}
   .pick-card .pc-top{position:relative;z-index:2;display:flex;align-items:center;gap:14px}
   .pick-card .pc-emoji{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:1.7rem;flex-shrink:0;backdrop-filter:blur(6px)}
@@ -434,18 +447,19 @@
     grid.appendChild(card);
   });
 
-  // extra pick-card: מדריך מערכות (opens the visual guide view)
+  // extra wide card: מדריך מערכות — placed BELOW the roles grid, larger, distinct colour
   (function(){
     const card=document.createElement('div');
-    card.className='pick-card guide-card';
+    card.className='guide-card-wide';
     card.onclick=openGuide;
     card.innerHTML=`
-      <div class="pc-top"><span class="pc-emoji">🖥️</span><h3>מדריך מערכות</h3></div>
-      <div class="pc-bottom">
-        <span class="pc-count">לוגין · שיפטר · גלאסיקס · גט טקסי · שלוחות</span>
-        <span class="pc-go">פתח מדריך <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      <div class="gcw-top"><span class="gcw-emoji">🖥️</span>
+        <div><h3>מדריך מערכות</h3>
+        <span class="gcw-sub">לוגין · שיפטר · גלאסיקס · גט טקסי · שחרור שלוחות</span></div>
+        <span class="gcw-go">פתח מדריך <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
       </div>`;
-    grid.appendChild(card);
+    const rp=document.getElementById('roles-pick');
+    rp.parentNode.insertBefore(card, rp.nextSibling);
   })();
 
   // move the guide section out of #home so it can act as its own view, hidden by default
